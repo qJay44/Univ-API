@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/update_server', methods=['POST'])
 def webhook():
     if request.method == 'POST':
-        repo = git.Repo('https://github.com/qJay44/Univ-API')
+        repo = git.Repo('./Univ-API')
         origin = repo.remotes.origin
 
         origin.pull()
@@ -19,13 +19,18 @@ def webhook():
         return 'Wrong event type', 400
 
 
-@app.route('/api/v1/getImg/<file_name>', method=['GET'])
+@app.route('/api/v1/getImg/<file_name>', methods=['GET'])
 def getImg(file_name):
     for root, dirs, files in os.walk('/home/qJay44/mysite/files/'):
         if file_name in files:
             return os.path.join(root, file_name)
 
     # convert(file_name)
+
+
+@app.route('/test', methods=['GET'])
+def test():
+    return 'test'
 
 
 def convert(file_name):

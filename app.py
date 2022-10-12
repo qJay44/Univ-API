@@ -32,7 +32,7 @@ def webhook():
         return 'Wrong event type', 400
 
 
-@app.route('/api/v1/check_update')
+@app.route('/api/v1/check_schedule')
 def check_update():
     webData = getWebData()
     dbData = ...
@@ -116,39 +116,5 @@ def tryToLoadPage(url):
 
 
 def convert(file_name):
-
-    instructions = {
-      'parts': [
-        {
-          'file': 'document'
-        }
-      ],
-      'output': {
-        'type': 'image',
-        'format': 'png',
-        'dpi': 500
-      }
-    }
-
-    response = rq.request(
-      'POST',
-      'https://api.pspdfkit.com/build',
-      headers = {
-        'Authorization': 'Bearer pdf_live_qpcg2HFUbaP4u52RoRabxOb8DFxL5GMoxQyh4xGGMsq'
-      },
-      files = {
-        'document': open(f'{file_name}.xls', 'rb')
-      },
-      data = {
-        'instructions': json.dumps(instructions)
-      },
-      stream = True
-    )
-
-    if response.ok:
-      with open('image.png', 'wb') as fd:
-        for chunk in response.iter_content(chunk_size=8096):
-          fd.write(chunk)
-    else:
-      print(response.text)
+    ...
 
